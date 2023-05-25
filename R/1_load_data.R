@@ -1,9 +1,6 @@
-
-
 ###############################################################################################
 # FIND DATA DIRECTORY, LOAD DATA GIVEN THE METRIC CHOICE, FORMAT : FROM,TO,WEIGHT
 ###############################################################################################
-
 
 #' Find the path containing the .xlsx file of the asked weighting scheme.
 #'
@@ -18,13 +15,12 @@ getDataDir<-function(data_path, choice = c('FBC','ODI','GFA','FA','Fintra')){
  # data_path <- '/home/imabrain/Documents/GraphConhect/data'
   files <- list.files(data_path,recursive=FALSE)
   filename = paste('stats_diffusion_metric_in_fullWM_',choice, '.xlsx',sep = "")
-  if(match(filename,files)){
+  if(filename %in% files){
     paste(data_path,'/',filename,sep="")
   }else{
     print("file not found")
   }
 }
-
 
 #' Create a dataframe with columns "subject_id","visit_id","from","to","weight" for the chosen weighting scheme
 #'
@@ -46,7 +42,6 @@ read_and_normalize_data <- function(data_path,WM_metric){
     df
   }
 }
-
 
 #
 # read_and_normalize_data <- function(data_path,WM_metric=c('FBC','GFA','FA','ODI','Fintra','FA')){
@@ -79,7 +74,6 @@ getLUT <- function(data_path){
   df<-as.data.frame(doc)
   df[,c('No','labelname')]
 }
-
 
 #' Get the list of subject participating visit i
 #'

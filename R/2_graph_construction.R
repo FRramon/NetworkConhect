@@ -1,9 +1,6 @@
-
 ###############################################################################################
 # CREATE GRAPH, EDGELIST,ADJACENCY MATRIX FROM 1_load_data.R
 ###############################################################################################
-
-
 
 #' Create a igraph object representing a subject at one visit, form one weighting scheme, at a given threshold.
 #'
@@ -176,7 +173,6 @@ plot_adjacency <- function(g,WM_metric=c('FBC','ODI','GFA','FA','Fintra')){
 	}
 }
 
-
 #' Plot the edges weight distribution for one participant : FBC
 #'
 #'TO DELETE OR UPDATE
@@ -228,7 +224,6 @@ plot_weight_distribution_graph_fa <- function(g,v_id,nBreaks){
   plot(mybreaksplot,h$count,main = paste("Distribution of edge weights - FA -",v_id), xlab = "FA value",ylab = "Count",type = 'h',lwd = 10,lend =2)
 }
 
-
 #' Plot the edges weight distribution for each participant of a group. FA weighted
 #'
 #'
@@ -265,7 +260,6 @@ plot_ridge_distribution <- function(dataFA,v_id){
         theme(legend.position = 'none')
   p
 }
-
 
 #' Plot the edges weight distribution for each participant of a group. FA weighted
 #'

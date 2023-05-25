@@ -1,8 +1,3 @@
-# library(shiny)
-# library(readxl)
-# library(igraph)
-# library(ggplot2)
-
 
 #' Compute the smallworldenss of a graph
 #'
@@ -212,8 +207,6 @@ hub_detectionh <- function(g,method){
   lbls <- merge(labels,LUT,by="No")
   index <- match(labels$No,lbls$No)
   lbls <- lbls[index,]
-
-  #png("/home/imabrain/Documents/test_s.png",height = 1080,width = 1920)
 
   p <- barplot(sort(distrib,decreasing = F)[121:166],axisnames=TRUE,col = colors,horiz = T, las = 2,xlab = method,xlim = c(0,max(distrib)),names = lbls[,2][121:166])
   abline(v=threshold)
