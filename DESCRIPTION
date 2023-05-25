@@ -1,0 +1,11 @@
+Package: NetworkConhect
+Title: Provide tools and script for network analysis from the CONHECT study
+Version: 0.0.0.9000
+Authors@R: 
+    person("Francois", "Ramon", , "francois.ramon@ghu-paris.fr", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Provide ways of representation of netwrok, different weighting schemes, thresholding methods, global and local analysis of network topology. Group comparisons. Statistical analysis.
+License: use_mit_license()
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
