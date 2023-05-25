@@ -62,7 +62,13 @@ multiplot <- gridExtra::grid.arrange(pg,pl,pc,ple,nrow = 2, ncol= 2)
 #                        SAVE RESULTS IN A RESULT FOLDER                       #
 ################################################################################
 
-#dirname(data_path)
+#create the directory
+resfolder <- "Results"
+folder_path <- file.path(dirname(data_path),resfolder)
+dir.create(folder_path)
 
+png(filename = "result_global_analysis.png")
+multiplot
+dev.off()
 
 
