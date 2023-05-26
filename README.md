@@ -1,7 +1,7 @@
 # NetworkConhect
 
 This R package provides tools for structural brain network analysis\
-***Author*** : <francois.ramon@etu.emse.fr>
+
 ## Installation
 
 You can install the dev version of NetworkConhect from Github with:
