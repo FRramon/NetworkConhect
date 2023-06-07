@@ -17,6 +17,3 @@ list
 \description{
 Get the list of subject participating visit i
 }
-\examples{
-get_subject_ids(data,"V1")
-}

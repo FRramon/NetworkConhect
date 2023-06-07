@@ -4,7 +4,7 @@
 \alias{getDataDir}
 \title{Find the path containing the .xlsx file of the asked weighting scheme.}
 \usage{
-getDataDir(choice = c("FBC", "ODI", "GFA", "FA", "Fintra"))
+getDataDir(data_path, choice = c("FBC", "ODI", "GFA", "FA", "Fintra"))
 }
 \arguments{
 \item{choice}{a chr for the weighting scheme : "FA", "FBC", "GFA"...}
@@ -14,7 +14,4 @@ chr the path containing the .xlsx file
 }
 \description{
 Find the path containing the .xlsx file of the asked weighting scheme.
-}
-\examples{
-getDataDir("FA")
 }

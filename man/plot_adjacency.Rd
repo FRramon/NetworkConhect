@@ -14,6 +14,3 @@ plot_adjacency(g, WM_metric = c("FBC", "ODI", "GFA", "FA", "Fintra"))
 \description{
 This function plot the adjacency matrix of a graph as a heatmap.
 }
-\examples{
-plot_adjacency(g,"FA")
-}

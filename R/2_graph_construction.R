@@ -14,8 +14,6 @@
 #' @param metric  chr the weighting scheme : "FA", "FBC", "GFA"...
 #' @param threshold float a threshold value, default = 0
 #' @returns a igraph object
-#' @examples
-#' makeGraph(dataFA,"1-101-MG","V1","FA",0.1)
 #' @export
 makeGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra'),threshold = 0){
 	WM_metric<-match.arg(WM_metric)
@@ -42,8 +40,6 @@ makeGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra'
 #' @param metric  chr the weighting scheme : "FA", "FBC", "GFA"...
 #' @param threshold float a threshold value, default = 0
 #' @returns dataframe
-#' @examples
-#' makeEdgelist(dataFA,"1-101-MG","V1","FA",0.1)
 #' @export
 makeEdgelist <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra'),threshold=0){
 	WM_metric<-match.arg(WM_metric)
@@ -64,8 +60,6 @@ makeEdgelist <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fint
 #' @param wantedDensity the density wanted for the new graph
 
 #' @returns a igraph object at density 'wantedDensity'
-#' @examples
-#' sparseThresh(sample_gnm(10,40),0.2)
 #' @export
 sparseThresh <- function(g, wantedDensity){
   adj_original <- as_adjacency_matrix(g,attr = "weight",sparse = FALSE )
@@ -115,8 +109,6 @@ sparseThresh <- function(g, wantedDensity){
 #' @param metric  chr the weighting scheme : "FA", "FBC", "GFA"...
 #' @param wantedDensity the density wanted for the graph
 #' @returns a igraph object
-#' @examples
-#' makeSparseGraph(dataFA,"1-101-MG","V1","FA",0.2)
 #' @export
 makeSparseGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra'),wantedDensity){
   WM_metric<-match.arg(WM_metric)
@@ -135,8 +127,6 @@ makeSparseGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','F
 #' @param data dataframe containing all data for one weighting scheme
 #' @param metric  chr the weighting scheme : "FA", "FBC", "GFA"...
 #' @returns float group minimum density
-#' @examples
-#' getMeanSparsity(dataFA,"FA")
 #' @export
 getMeanSparsity <- function(data,WM_metric = c('FBC','ODI','GFA','FA','Fintra')){
   timePoint <- c('V1','V2','V3')
@@ -158,8 +148,6 @@ getMeanSparsity <- function(data,WM_metric = c('FBC','ODI','GFA','FA','Fintra'))
 #'
 #' @param g igraph object
 #' @param metric  chr the weighting scheme : "FA", "FBC", "GFA"...
-#' @examples
-#' plot_adjacency(g,"FA")
 #' @export
 plot_adjacency <- function(g,WM_metric=c('FBC','ODI','GFA','FA','Fintra')){
 	WM_metric<-match.arg(WM_metric)
@@ -179,8 +167,6 @@ plot_adjacency <- function(g,WM_metric=c('FBC','ODI','GFA','FA','Fintra')){
 #' Plot the fiber count edges weight distribution on a log scale for one participant.
 #'
 #' @param data edge list
-#' @examples
-#' plot_weight_distribution(data)
 #' @export
 plot_weight_distribution <- function(data){
 	mybreaks <- seq(0,max(data$weight,1000))
@@ -195,8 +181,6 @@ plot_weight_distribution <- function(data){
 #'
 #' @param g igraph object
 #' @param nBreaks number of breaks for the histogram
-#' @examples
-#' plot_weight_distribution_graph(g,40)
 #' @export
 plot_weight_distribution_graph <- function(g,nBreaks){
   w <- data.frame(E(g)$weight)[,1]
@@ -213,8 +197,6 @@ plot_weight_distribution_graph <- function(g,nBreaks){
 #'
 #' @param g igraph object
 #' @param nBreaks number of breaks for the histogram
-#' @examples
-#' plot_weight_distribution(data)
 #' @export
 plot_weight_distribution_graph_fa <- function(g,v_id,nBreaks){
   w <- data.frame(E(g)$weight)[,1]
@@ -233,8 +215,6 @@ plot_weight_distribution_graph_fa <- function(g,v_id,nBreaks){
 #'
 #' @param dataFA dataframe containing all the FA weighted data
 #' @param v_id chr visit id like "V1", "V2"...
-#' @examples
-#' plot_weight_distribution(data)
 #' @export
 plot_ridge_distribution <- function(dataFA,v_id){
   idsV1 <- get_subject_ids(dataFA,v_id)
@@ -270,8 +250,6 @@ plot_ridge_distribution <- function(dataFA,v_id){
 #'
 #' @param dataFA dataframe containing all the FA weighted data
 #' @param v_id chr visit id like "V1", "V2"...
-#' @examples
-#' get_edge_distribution(data)
 #' @export
 get_edge_distribution <- function(dataFA,v_id){
   idsV1 <- get_subject_ids(dataFA,v_id)

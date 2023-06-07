@@ -15,6 +15,3 @@ plot_weight_distribution_graph_fa(g, v_id, nBreaks)
 TO DELETE OR UPDATE
 Plot the fractional anistropy edges weight distribution for one participant.from a graph
 }
-\examples{
-plot_weight_distribution(data)
-}

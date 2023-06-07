@@ -17,6 +17,3 @@ float group minimum density
 \description{
 Compute all graph densities and returns the mininum
 }
-\examples{
-getMeanSparsity(dataFA,"FA")
-}

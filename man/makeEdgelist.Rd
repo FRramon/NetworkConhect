@@ -31,6 +31,3 @@ Create a data frame of three columns : from, to, weight. The edge list represent
 for one weighting scheme on the edges (ex : "FA"). You can as well choose a threshold value. This will truncate the graph by
 deleting the edges that have a value below the threshold. Default is 0
 }
-\examples{
-makeEdgelist(dataFA,"1-101-MG","V1","FA",0.1)
-}

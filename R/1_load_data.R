@@ -6,8 +6,6 @@
 #'
 #' @param choice a chr for the weighting scheme : "FA", "FBC", "GFA"...
 #' @returns chr the path containing the .xlsx file
-#' @examples
-#' getDataDir("FA")
 #' @export
 getDataDir<-function(data_path, choice = c('FBC','ODI','GFA','FA','Fintra')){
 
@@ -15,8 +13,10 @@ getDataDir<-function(data_path, choice = c('FBC','ODI','GFA','FA','Fintra')){
  # data_path <- '/home/imabrain/Documents/GraphConhect/data'
   files <- list.files(data_path,recursive=FALSE)
   filename = paste('stats_diffusion_metric_in_fullWM_',choice, '.xlsx',sep = "")
+  print(filename)
   if(filename %in% files){
     paste(data_path,'/',filename,sep="")
+   # print('ok!')
   }else{
     print("file not found")
   }
@@ -64,8 +64,6 @@ read_and_normalize_data <- function(data_path,WM_metric){
 #' @returns dataframe of two columns : No for the region id, labelname for the region label
 #'
 #'
-#' @examples
-#' getLUT()
 #' @export
 getLUT <- function(data_path){
   txt_path <- paste(data_path,"freesurfer_lut.txt",sep="")
@@ -80,8 +78,6 @@ getLUT <- function(data_path){
 #' @param data dataframe (created by 'read_and_normalize')
 #' @param v_id chr visit id, like "V1", "V2", "V3".
 #' @returns list
-#' @examples
-#' get_subject_ids(data,"V1")
 #' @export
 get_subject_ids <- function(data,v_id){
   df <- subset(data,visit_id == v_id)

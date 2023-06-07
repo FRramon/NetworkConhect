@@ -13,6 +13,3 @@ normalized_shortest_path(g)
 Compute the normalized characteristic path length of a graph.Normalized characteristic path length is defined by dividing characteristic path length
 by lambda' which is the mean of values obtain from 100 random graphs (with same number of edges/nodes and degree/weight distribution)
 }
-\examples{
-normalized_shortest_path(g)
-}

@@ -19,6 +19,3 @@ Graph density is defined as the number of edges divided by the possible number o
 The function calculates the number of edges that is necessary to delete to obtain the wantedDensity, delete the lowest weighted number of edges, and returns
 a newly created graph, that has the wanted density.
 }
-\examples{
-sparseThresh(sample_gnm(10,40),0.2)
-}

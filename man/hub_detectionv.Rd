@@ -17,6 +17,3 @@ X > mean(X) + sd(X)
 Where X can be node strength, betweenness centrality, or closeness centrality
 Provide a vertical histogram plot
 }
-\examples{
-hub_detectionv(g,"closeness")
-}

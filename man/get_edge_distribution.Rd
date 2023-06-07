@@ -16,6 +16,3 @@ Get fractional anistropy edges weight distribution each participants of a group
 (V1, V2, V3). Plot it as a ridge plot. Note : You can plot the three ridges side to side
 by calling this function three times and using gridExtra::grid.arrange.
 }
-\examples{
-get_edge_distribution(data)
-}

@@ -31,6 +31,3 @@ Create a weighted undirected graph with igraph. The graph represent a patient (e
 for one weighting scheme on the edges (ex : "FA"). You can as well choose a threshold value. This will truncate the graph by
 deleting the edges that have a value below the threshold. Default is 0
 }
-\examples{
-makeGraph(dataFA,"1-101-MG","V1","FA",0.1)
-}

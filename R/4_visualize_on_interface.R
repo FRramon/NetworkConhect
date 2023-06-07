@@ -18,8 +18,6 @@
 #'
 #' @param metric a chr for the weighting scheme : "FA", "FBC", "GFA"...
 #' @returns a shiny interface
-#' @examples
-#' interfaceConhect("FA")
 #' @export
 interfaceConhect <- function(metric){
   data_path <- getDataDir(metric)

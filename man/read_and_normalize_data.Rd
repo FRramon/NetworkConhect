@@ -2,12 +2,7 @@
 % Please edit documentation in R/1_load_data.R
 \name{read_and_normalize_data}
 \alias{read_and_normalize_data}
-\title{#' Update a dataframe containing a column ROI1_ROI2 to two columns ROI1 and ROI2.
-#'
-#' @param data the dataframe
-#' @returns a data frame with the two additional columns
-#' @export
-separateRois <- function(data){}
+\title{Create a dataframe with columns "subject_id","visit_id","from","to","weight" for the chosen weighting scheme}
 \usage{
 read_and_normalize_data(data_path, WM_metric)
 }
@@ -20,5 +15,5 @@ read_and_normalize_data(data_path, WM_metric)
 the newly created dataframe
 }
 \description{
-
+Create a dataframe with columns "subject_id","visit_id","from","to","weight" for the chosen weighting scheme
 }

@@ -4,14 +4,11 @@
 \alias{getLUT}
 \title{Create a dataframe from freesurfer lut.}
 \usage{
-getLUT()
+getLUT(data_path)
 }
 \value{
 dataframe of two columns : No for the region id, labelname for the region label
 }
 \description{
 Create a dataframe from freesurfer lut.
-}
-\examples{
-getLUT()
 }

@@ -13,8 +13,6 @@
 #' @param metric chr the weighting scheme
 #' @param eval chr the measure to access the network topology
 #' @param threshold float a threshold if the data is computed on a specific threshold. default = 0
-#' @examples
-#' computeSW(dataFA,"V1","FA","global_eff",0.2)
 #' @export
 computeSW <- function(data,
                       v_id,
@@ -118,8 +116,6 @@ getNormalizeData<-function(Gdata,listScores){
 #' @param metric chr the weighting scheme
 #' @param eval chr the measure to access the network topology
 #' @param threshold float a threshold if the data is computed on a specific threshold. default = 0
-#' @examples
-#' getData(dataFA,"FA","global_eff",0.2)
 #' @export
 getData <- function(data,WM_metric,eval,thresh_method,tvalue){
   print("V1")
@@ -148,8 +144,6 @@ getData <- function(data,WM_metric,eval,thresh_method,tvalue){
 #' Perform a RMANOVA on the three groups. Dependent variable is the topology measure.
 #' within factor is the group (V1,V2,V3).
 #' @param Gdata dataframe two columns : group, y, created by getData
-#' @examples
-#' RMANOVA_analysis(GdataFA)
 #' @export
 LinearModel_analysis <- function(Gdata){
   llm  <- lme4::glmer(Y ~ Group + (1|ids),data = Gdata,family = Gamma(link = "log"))
@@ -203,6 +197,22 @@ check_assumptions <- function(Gtest){
   hist(ranef(fit)$ids[, 1],main = "distribution of the random factor", sub = as.character(shapiro.test(ranef(fit)$ids[, 1])$p))
 }
 
+#' plot the data for a good visualization
+#' @param G the dataframe
+#' @export
+plot_dataviz <- function(G,lab){
+  p <- ggbetweenstats(
+      data = G,
+      x = Group,
+      y = Y,
+      pairwise.comparisons = F,
+      pairwise.display = F,
+      ylab = lab,
+      results.subtitle = F,
+      bf.message = F)
+  p
+}
+
 ################################################################################
 # MAIN
 ################################################################################
@@ -215,19 +225,17 @@ check_assumptions <- function(Gtest){
 #' @param eval chr the global network topology measure : like clust_coeff, global_eff
 #' @param thresh_method chr the method of threshoding. Whether "threshold" or "density"
 #' @param threshold float the threshold/density to be applied on each network in the analysis.
-#' @examples
-#' eval_on_single_threshold("FA","global_eff",0.2)
 #' @export
-main_global_llm <- function(weighting_scheme = c('GFA','FBC','FA','Fintra','ODI'),
+main_global_llm <- function(data_path,weighting_scheme = c('GFA','FBC','FA','Fintra','ODI'),
                                  eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness'),
                                  thresh_method,
                                  tvalue
                                  ){
 
-  data_path <- getDataDir(weighting_scheme)
+  file_path <- getDataDir(data_path,weighting_scheme)
   print("Step 1 : Loading data...")
-  print(data_path)
-  whole_data <-read_and_normalize_data(data_path, weighting_scheme)
+  print(file_path)
+  whole_data <-read_and_normalize_data(file_path, weighting_scheme)
   print("Step 2 : Graph creation & computing measures...")
   G <- getData(whole_data, weighting_scheme,eval,thresh_method,tvalue)
   check_assumptions(G)
@@ -241,6 +249,7 @@ main_global_llm <- function(weighting_scheme = c('GFA','FBC','FA','Fintra','ODI'
   plot_model(fit,show.intercept = T,show.p = T,show.legend = T,show.data = T,show.values = T,vline.color="red")
 
   plot_results_lmer(fit)
+ # plot_dataviz(G)
 
   print(summary(fit))
   list("fit"=fit,"data"=G)

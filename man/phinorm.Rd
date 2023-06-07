@@ -15,6 +15,3 @@ phinorm(g, k)
 phi norm is defined as the ratio of phi(k) (the density of a graph with nodes of degree >k), divided by the phi_rand(k),
 which is the same measure for a random graph (with same number of edges/nodes and degree/weight distribution)
 }
-\examples{
-phinorm(g,10)
-}

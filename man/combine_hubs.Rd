@@ -19,6 +19,3 @@ The difference with the other hub detection function is that it is less restrict
 if it fullfill the inequality for at least one method. Here the function has been created to work on group average data (three graphs in input,
 corresponding to each average graph for a visit)
 }
-\examples{
-combine_hubs("FA",R)
-}

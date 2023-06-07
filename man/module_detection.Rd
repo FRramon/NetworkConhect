@@ -12,6 +12,3 @@ module_detection(g)
 \description{
 Module detection is done with Louvain algorithm, for cluster detection.
 }
-\examples{
-module_detection(g)
-}

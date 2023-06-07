@@ -15,6 +15,3 @@ plot_weight_distribution_graph(g, nBreaks)
 TO DELETE OR UPDATE
 Plot the fiber count edges weight distribution on a log scale for one participant. from a igraph object
 }
-\examples{
-plot_weight_distribution_graph(g,40)
-}

@@ -31,6 +31,3 @@ Create a weighted undirected graph with igraph. The graph represent a patient (e
 for one weighting scheme on the edges (ex : "FA"). You need as well to choose a density value. This will truncate the graph by
 deleting weakest edges to obtain a graph of the wanted density.
 }
-\examples{
-makeSparseGraph(dataFA,"1-101-MG","V1","FA",0.2)
-}

@@ -9,9 +9,7 @@ hub_detectionh(g, method)
 \arguments{
 \item{g}{igraph object}
 
-\item{method}{chr method for hub detection "closeness","strength","betweenness"
-#' @examples
-hub_detectionh(g,"closeness")}
+\item{method}{chr method for hub detection "closeness","strength","betweenness"}
 }
 \description{
 Nodes are defined as Hubs if they verify the inequality :

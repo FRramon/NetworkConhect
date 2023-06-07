@@ -43,7 +43,7 @@ computeGr <- function(g){
 #' @param metric the metric chosen for the weight in the network. "FBC","FA"..
 #' @param tvalue density threshold value. Default .15
 #' @export
-compute_phi_patients <- function(data,v_id,metric,tvalue,k){
+compute_phi_patients <- function(data,v_id,metric,tvalue,k,nrand){
   subjects <- get_subject_ids(data,v_id)
   P <- c()
   for(s in subjects){
@@ -53,7 +53,7 @@ compute_phi_patients <- function(data,v_id,metric,tvalue,k){
 
     # gR <- computeGr(g)
     phiR <- c()
-    for(nr in 1:1000){
+    for(nr in 1:nrand){
       gR <- computeGr(gt)
       phir <- computePhi(gR,k)
       #unlist(lapply(X = X, FUN = computePhi,g = gR))
@@ -77,17 +77,17 @@ compute_phi_patients <- function(data,v_id,metric,tvalue,k){
 #' @param metric the metric chosen for the weight in the network. "FBC","FA"..
 #' @param tvalue density threshold value. Default .15
 #' @export
-computePhiGroup <- function(data,metric,t,k){
+computePhiGroup <- function(dataFBC,metric,t,k,nrand){
   # print(k)
   # print("Loading data...")
   # data_dir <- getDataDir(metric)
   # dataFBC <- read_and_normalize_data(data_dir,metric)
   print("Computing V1...")
-  v1 <- compute_phi_patients(dataFBC,"V1",metric,t,k)
+  v1 <- compute_phi_patients(dataFBC,"V1",metric,t,k,nrand)
   print("Computing V2...")
-  v2 <- compute_phi_patients(dataFBC,"V2",metric,t,k)
+  v2 <- compute_phi_patients(dataFBC,"V2",metric,t,k,nrand)
   print("Computing V3...")
-  v3 <- compute_phi_patients(dataFBC,"V3",metric,t,k)
+  v3 <- compute_phi_patients(dataFBC,"V3",metric,t,k,nrand)
 
   D <- data.frame(
     richphi = c(v1,v2,v3),
@@ -107,14 +107,19 @@ computePhiGroup <- function(data,metric,t,k){
 #' @param kmin minimum degree for the range of analysis default 10
 #' @param kmax maximum degree for the range of analysis default 50
 #' @export
-main_rich_club_analysis <- function(data,metric = "FBC",tvalue = 0.15 ,kmin = 10,kmax = 50){
+main_rich_club_analysis <- function(data_path,metric = "FBC",tvalue = 0.15 ,kmin = 10,kmax = 50,nrand){
+
+  file_path <- getDataDir(data_path,metric)
+  print("Step 1 : Loading data...")
+  print(file_path)
+  data <-read_and_normalize_data(file_path, metric)
   X <- seq(kmin,kmax,1)
   j=1
   M <- c("V1","V2","V3")
   SD <- c("V1","V2","V3")
   fit <- list()
   for(i in X){
-    fit[[j]] <- computePhiGroup(dataFBC = data,metric = metric, t= tvalue, k= i)
+    fit[[j]] <- computePhiGroup(dataFBC = data,metric = metric, t= tvalue, k= i,nrand)
     m1 <- aggregate(x=fit[[j]]$data$richphi, by = list(fit[[j]]$data$timepoint),FUN=mean)
     m2 <- m1$x
     M <- rbind(M,m2)
@@ -145,25 +150,25 @@ main_rich_club_analysis <- function(data,metric = "FBC",tvalue = 0.15 ,kmin = 10
 
   D <- data.frame(cbind(DM,DSD))
 
-  ggplot(D,aes(x=X)) +
-    geom_line(aes(y=mV1,color = "V1")) +
-    geom_line(aes(y=mV2,color = "V2")) +
-    geom_line(aes(y=mV3,color = "V3")) +
-    geom_point(aes(y=mV1,color = "V1")) +
-    geom_point(aes(y=mV2,color = "V2")) +
-    geom_point(aes(y=mV3,color = "V3")) +
-    geom_errorbar(aes(ymin = mV1 - sdV1,ymax = mV1 + sdV1),width = .2) +
-    geom_errorbar(aes(ymin = mV2 - sdV2,ymax = mV2 + sdV2),width = .2) +
-    geom_errorbar(aes(ymin = mV3 - sdV3,ymax = mV3 + sdV3),width = .2) +
+  p <- ggplot(D,aes(x=X)) +
+      geom_line(aes(y=mV1,color = "V1")) +
+      geom_line(aes(y=mV2,color = "V2")) +
+      geom_line(aes(y=mV3,color = "V3")) +
+      geom_point(aes(y=mV1,color = "V1")) +
+      geom_point(aes(y=mV2,color = "V2")) +
+      geom_point(aes(y=mV3,color = "V3")) +
+      geom_errorbar(aes(ymin = mV1 - sdV1,ymax = mV1 + sdV1),width = .2) +
+      geom_errorbar(aes(ymin = mV2 - sdV2,ymax = mV2 + sdV2),width = .2) +
+      geom_errorbar(aes(ymin = mV3 - sdV3,ymax = mV3 + sdV3),width = .2) +
 
-    labs(color = "Curves",x= "degree k",y = "phi normalized") +
-    scale_color_manual(values = c("V1" = "lightgreen","V2" = "darkolivegreen3","V3" = "darkgreen")) +
-    theme_bw() +
-    theme(panel.grid = element_blank(),
-          legend.position = c(0.1,0.9),
-          legend.background =element_rect(fill = "white",color = "black"),
-          legend.key = element_rect(fill = "white"),
-          legend.title = element_blank())
+      labs(color = "Curves",x= "degree k",y = "phi normalized") +
+      scale_color_manual(values = c("V1" = "lightgreen","V2" = "darkolivegreen3","V3" = "darkgreen")) +
+      theme_bw() +
+      theme(panel.grid = element_blank(),
+            legend.position = c(0.1,0.9),
+            legend.background =element_rect(fill = "white",color = "black"),
+            legend.key = element_rect(fill = "white"),
+            legend.title = element_blank())
 
   p3 <- list()
   p2 <- list()
@@ -172,5 +177,6 @@ main_rich_club_analysis <- function(data,metric = "FBC",tvalue = 0.15 ,kmin = 10
     p3[[j]] <- fit[[j]]$coeffs[3,5]
     print(j)
   }
+  list("plot" = p,"pvaluesV1V2" = p2,"pvaluesV1V3" = p3)
 
 }

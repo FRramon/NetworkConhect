@@ -15,6 +15,3 @@ a shiny interface
 \description{
 Generate an interface to plot graph for a patient & visit & weighting scheme.
 }
-\examples{
-interfaceConhect("FA")
-}

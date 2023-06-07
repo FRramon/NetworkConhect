@@ -6,8 +6,6 @@
 #' Normalized X is defined by dividing X by X' which is the mean of values obtain from 100 random graphs (with same number of edges/nodes and degree/weight distribution)
 #'
 #' @param g igraph object
-#' @examples
-#' smallworldeness(g)
 #' @export
 smallworldeness <- function(g){
 
@@ -52,8 +50,6 @@ smallworldeness <- function(g){
 #'by lambda' which is the mean of values obtain from 100 random graphs (with same number of edges/nodes and degree/weight distribution)
 #'
 #' @param g igraph object
-#' @examples
-#' normalized_shortest_path(g)
 #' @export
 normalized_shortest_path <- function(g){
   L <- mean_distance(g)
@@ -78,8 +74,6 @@ normalized_shortest_path <- function(g){
 #'by lambda' which is the mean of values obtain from 100 random graphs (with same number of edges/nodes and degree/weight distribution)
 #'
 #' @param g igraph object
-#' @examples
-#' normalized_shortest_path(g)
 #' @export
 normalized_cluster_coeff <- function(g){
   C <- transitivity(g)
@@ -106,8 +100,6 @@ normalized_cluster_coeff <- function(g){
 #'
 #' @param g igraph object
 #' @param k int
-#' @examples
-#' phinorm(g,10)
 #' @export
 phinorm <- function(g,k){
   set.seed(123)
@@ -140,8 +132,6 @@ phinorm <- function(g,k){
 #'Module detection is done with Louvain algorithm, for cluster detection.
 #'
 #' @param g igraph object
-#' @examples
-#' module_detection(g)
 #' @export
 module_detection <- function(g){
 	gamma <- seq(0.25,2,0.025)
@@ -187,23 +177,23 @@ hub_detectionVisit <- function(g1,g2,g3){
 #'
 #' @param g igraph object
 #' @param method chr method for hub detection "closeness","strength","betweenness"
-#' #' @examples
-#' hub_detectionh(g,"closeness")
 #' @export
-hub_detectionh <- function(g,method){
+hub_detectionh <- function(g,method,data_path){
   if(method == 'strength'){
     distrib <- strength(g)
   } else if (method == 'betweenness'){
     distrib <-betweenness(g,weights = 1/E(g)$weight)
   } else if (method == 'closeness'){
     distrib <- closeness(g,weights = 1/E(g)$weight)
+  } else if (method == 'degree'){
+    distrib <- degree(g)
   }
   threshold <- mean(distrib) + sd(distrib)
   colors <- ifelse(sort(distrib,decreasing = F)[120:166]>threshold, "yellow", "lightyellow")
 
   labels <- as.data.frame(rownames(as.data.frame(sort(distrib,decreasing = F))))
   colnames(labels) <- "No"
-  LUT <- getLUT()
+  LUT <- getLUT(data_path)
   lbls <- merge(labels,LUT,by="No")
   index <- match(labels$No,lbls$No)
   lbls <- lbls[index,]
@@ -229,8 +219,6 @@ hub_detectionh <- function(g,method){
 #'
 #' @param g igraph object
 #' @param method chr method for hub detection "closeness","strength","betweenness"
-#' @examples
-#' hub_detectionv(g,"closeness")
 #' @export
 hub_detectionv <- function(g,method){
   if(method == 'strength'){
@@ -239,6 +227,8 @@ hub_detectionv <- function(g,method){
     distrib <-betweenness(g)
   } else if (method == 'closeness'){
     distrib <- closeness(g)
+  } else if (method == 'degree'){
+    distrib <- degree(g)
   }
   threshold <- mean(distrib) + sd(distrib)
   colors <- ifelse(sort(distrib,decreasing = T)>threshold, "yellow", "lightyellow")
@@ -275,8 +265,6 @@ hub_detectionv <- function(g,method){
 #'
 #' @param metric chr weighting scheme like "FA", "GFA"
 #' @param R is a list of graph containing G1, G2, G3 (one graph for each visit).
-#' @examples
-#' combine_hubs("FA",R)
 #' @export
 combine_hubs <- function(metric,R){
   metric <- "GFA"

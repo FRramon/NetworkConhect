@@ -14,6 +14,3 @@ Compute the smallworldeness of a graph in the sense of Hagmann 2008.
 Smallworldeness is defined as the ratio of the normalized clustering by the normalized characteristic path length;
 Normalized X is defined by dividing X by X' which is the mean of values obtain from 100 random graphs (with same number of edges/nodes and degree/weight distribution)
 }
-\examples{
-smallworldeness(g)
-}

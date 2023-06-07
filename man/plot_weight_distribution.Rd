@@ -13,6 +13,3 @@ plot_weight_distribution(data)
 TO DELETE OR UPDATE
 Plot the fiber count edges weight distribution on a log scale for one participant.
 }
-\examples{
-plot_weight_distribution(data)
-}
