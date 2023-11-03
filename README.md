@@ -1,6 +1,9 @@
 # NetworkConhect
 
 This R package provides tools for structural brain network analysis\
+* Computation of different graph theoretical measures
+* Statistical analysis (LMM)
+* Visualization with ggseg
 
 ## Installation
 
