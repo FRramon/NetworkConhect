@@ -1,3 +1,4 @@
+# Author: Francois Ramon
 
 #' Compute non normalized rich club coefficient of a graph g
 #'

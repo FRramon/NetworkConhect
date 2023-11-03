@@ -1,3 +1,4 @@
+# Author: Francois Ramon
 
 #' Compute the smallworldenss of a graph
 #'
