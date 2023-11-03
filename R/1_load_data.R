@@ -1,3 +1,5 @@
+# Author Francois Ramon
+
 ###############################################################################################
 # FIND DATA DIRECTORY, LOAD DATA GIVEN THE METRIC CHOICE, FORMAT : FROM,TO,WEIGHT
 ###############################################################################################
@@ -7,6 +9,9 @@
 #' @param choice a chr for the weighting scheme : "FA", "FBC", "GFA"...
 #' @returns chr the path containing the .xlsx file
 #' @export
+#'
+#'
+
 getDataDir<-function(data_path, choice = c('FBC','ODI','GFA','FA','Fintra')){
 
   choice<-match.arg(choice)
