@@ -4,7 +4,7 @@
 \alias{hub_detectionh}
 \title{Hub detection on a graph using different methods}
 \usage{
-hub_detectionh(g, method)
+hub_detectionh(g, method, data_path)
 }
 \arguments{
 \item{g}{igraph object}

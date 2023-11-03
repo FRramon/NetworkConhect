@@ -4,7 +4,7 @@
 \alias{plot_dataviz}
 \title{plot the data for a good visualization}
 \usage{
-plot_dataviz(G)
+plot_dataviz(G, lab)
 }
 \arguments{
 \item{G}{the dataframe}

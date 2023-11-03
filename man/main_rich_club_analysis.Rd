@@ -5,16 +5,15 @@
 \title{Main function for the rich club analysis}
 \usage{
 main_rich_club_analysis(
-  data,
+  data_path,
   metric = "FBC",
   tvalue = 0.15,
   kmin = 10,
-  kmax = 50
+  kmax = 50,
+  nrand
 )
 }
 \arguments{
-\item{data}{a dataframe containing all data for analysis}
-
 \item{metric}{the metric chosen for the weight in the network. "FBC","FA"..}
 
 \item{tvalue}{density threshold value. Default .15}
@@ -22,6 +21,8 @@ main_rich_club_analysis(
 \item{kmin}{minimum degree for the range of analysis default 10}
 
 \item{kmax}{maximum degree for the range of analysis default 50}
+
+\item{data}{a dataframe containing all data for analysis}
 }
 \description{
 Main function for the rich club analysis
