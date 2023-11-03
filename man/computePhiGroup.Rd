@@ -4,7 +4,7 @@
 \alias{computePhiGroup}
 \title{Do all statistical analysis at each k}
 \usage{
-computePhiGroup(dataFBC, metric, t, k)
+computePhiGroup(dataFBC, metric, t, k, nrand)
 }
 \arguments{
 \item{metric}{the metric chosen for the weight in the network. "FBC","FA"..}

@@ -4,7 +4,7 @@
 \alias{compute_phi_patients}
 \title{Compute all phi for all subject in one group (v_id)}
 \usage{
-compute_phi_patients(data, v_id, metric, tvalue, k)
+compute_phi_patients(data, v_id, metric, tvalue, k, nrand)
 }
 \arguments{
 \item{data}{a dataframe containing all data for analysis}
