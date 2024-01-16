@@ -20,8 +20,9 @@
 makeGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra'),threshold = 0){
 	WM_metric<-match.arg(WM_metric)
 	df <- subset(data, subject_id == s_id & visit_id == v_id)
-	edgelist<-data.frame(df[,3],df[,4],df[,5])
-	colnames(edgelist) <- c('from','to','weight')
+  edgelist <- df[, c('from','to','weight')]
+	# edgelist<-data.frame(df[,3],df[,4],df[,5])
+	# colnames(edgelist) <- c('from','to','weight')
 	elist<-subset(edgelist,weight>threshold)
 	#finv <- function(x) 1/x
 	#elist$weight <- as.numeric(lapply(elist$weight,finv))
