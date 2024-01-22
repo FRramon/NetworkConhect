@@ -38,6 +38,7 @@ read_and_normalize_data <- function(data_path,WM_metric){
   if(WM_metric=='FBC'){
     # drois <- separateRois(data_full)
     # weight: 9 for fiber density, 8 for distance, 5 for streamline count
+    print("select streamline count")
     df <- as.data.frame(cbind(data_full[,1],data_full[,2],data_full[,6],data_full[,7],data_full[,5]))
     colnames(df) <- c('subject_id','visit_id','from','to','weight')
     df
