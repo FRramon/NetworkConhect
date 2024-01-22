@@ -91,12 +91,12 @@ sparseThresh <- function(g, wantedDensity){
 
   isolated_nodes <- which(degree(gS1) == 0)
   gS <- delete.vertices(gS1,isolated_nodes)
-  print(vcount(gS1))
-  print(vcount(gS))
+  #print(vcount(gS1))
+  #print(vcount(gS))
 
   nS <- vcount(gS)
   Nspars <- 2*ecount(gS)/(nS*nS-nS)
-  print(paste("New sparsity ",Nspars))
+  #print(paste("New sparsity ",Nspars))
   gS
 }
 
