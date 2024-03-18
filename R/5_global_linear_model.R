@@ -18,7 +18,7 @@
 #' @export
 computeSW <- function(data,
                       v_id,
-                      WM_metric = c('FBC','ODI','GFA','Fintra','FA'),
+                      WM_metric = c('FBC','ODI','GFA','Fintra','FA','PearsonCorrel'),
                       eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness'),
                       thresh_method,
                       tvalue
@@ -120,7 +120,6 @@ getNormalizeData<-function(Gdata,listScores){
 #' @param threshold float a threshold if the data is computed on a specific threshold. default = 0
 #' @export
 getData <- function(data,WM_metric,eval,thresh_method,tvalue){
-  print("V1")
   gV1 <- computeSW(data,"V1",WM_metric,eval,thresh_method,tvalue)
   gV2 <- computeSW(data,"V2",WM_metric,eval,thresh_method,tvalue)
   gV3 <- computeSW(data,"V3",WM_metric,eval,thresh_method,tvalue)
@@ -228,7 +227,7 @@ plot_dataviz <- function(G,lab){
 #' @param thresh_method chr the method of threshoding. Whether "threshold" or "density"
 #' @param threshold float the threshold/density to be applied on each network in the analysis.
 #' @export
-main_global_llm <- function(data_path,weighting_scheme = c('GFA','FBC','FA','Fintra','ODI'),
+main_global_llm <- function(data_path,weighting_scheme = c('GFA','FBC','FA','Fintra','ODI','PearsonCorrel'),
                                  eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness'),
                                  thresh_method,
                                  tvalue

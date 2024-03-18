@@ -12,7 +12,7 @@
 #'
 #'
 
-getDataDir<-function(data_path, choice = c('FBC','ODI','GFA','FA','Fintra')){
+getDataDir<-function(data_path, choice = c('FBC','ODI','GFA','FA','Fintra','PearsonCorrel')){
 
   choice<-match.arg(choice)
  # data_path <- '/home/imabrain/Documents/GraphConhect/data'
@@ -40,7 +40,6 @@ read_and_normalize_data <- function(data_path,WM_metric){
     # weight: 9 for fiber density, 8 for distance, 5 for streamline count
     #print("select streamline count")
     df <- as.data.frame(cbind(data_full[,1],data_full[,2],data_full[,6],data_full[,7],data_full[,5]))
-    df <- data_full[c("from","to")]
     colnames(df) <- c('subject_id','visit_id','from','to','weight')
     df
   }else{
