@@ -31,7 +31,6 @@ computeSW <- function(data,
 
   for(j in 1:length(subject_ids)){
     s_id <- subject_ids[j]
-    print(s_id)
     if(thresh_method == "threshold"){
       g <- makeGraph(data,s_id,v_id,WM_metric,tvalue)
 
