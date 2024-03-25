@@ -19,7 +19,7 @@
 computeSW <- function(data,
                       v_id,
                       WM_metric = c('FBC','ODI','GFA','Fintra','FA','PearsonCorrel'),
-                      eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness'),
+                      eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness','edge_weight'),
                       thresh_method,
                       tvalue
 ){
@@ -64,6 +64,8 @@ computeSW <- function(data,
       value <- mean(strength(g))
     } else if (eval =='betweenness'){
       value <- mean(betweenness(g))
+    } else if (eval == "edge_weight"){
+      value <- mean(E(g)$weight)
     }
     RES[j] <- value
   }
