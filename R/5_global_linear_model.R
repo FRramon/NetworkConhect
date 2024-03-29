@@ -32,11 +32,22 @@ computeSW <- function(data,
   for(j in 1:length(subject_ids)){
     s_id <- subject_ids[j]
     if(thresh_method == "threshold"){
-      g <- makeGraph(data,s_id,v_id,WM_metric,tvalue)
+      if(WM_metric=="PearsonCorrel"){
+        g <- makeGraphFunc(data,s_id,v_id,WM_metric,tvalue)
+      }else {
+        g <- makeGraph(data,s_id,v_id,WM_metric,tvalue)
+      }
 
     } else if(thresh_method == "density"){
-      gT <- makeGraph(data,s_id,v_id,WM_metric,0)
-      g <- sparseThresh(gT,tvalue)
+      if(WM_metric=="PearsonCorrel"){
+        gT <- makeGraphFunc(data,s_id,v_id,WM_metric,0)
+        g <- sparseThresh(gT,tvalue)
+      }else {
+        gT <- makeGraph(data,s_id,v_id,WM_metric,0)
+        g <- sparseThresh(gT,tvalue)
+
+      }
+
       # print("ok")
       # A <- as_adjacency_matrix(g)
       # print("ok")

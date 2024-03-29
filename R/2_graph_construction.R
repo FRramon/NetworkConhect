@@ -31,6 +31,34 @@ makeGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra'
 	g
 }
 
+#' Create a igraph object representing a subject at one visit, form one weighting scheme, at a given threshold.
+#'
+#' Create a weighted undirected graph with igraph. The graph represent a patient (ex : "1-E-101-MG"), at one visit (ex : "V1"),
+#' for one weighting scheme on the edges (ex : "FA"). You can as well choose a threshold value. This will truncate the graph by
+#' deleting the edges that have a value below the threshold. Default is 0
+#'
+#' @param data dataframe containing all data for one weighting scheme
+#' @param s_id chr the subject id: like "1-101-MG"...
+#' @param v_id chr the visit id like "V1"...
+#' @param metric  chr the weighting scheme : "FA", "FBC", "GFA"...
+#' @param threshold float a threshold value, default = 0
+#' @returns a igraph object
+#' @export
+makeGraphFunc <- function(data,s_id,v_id,WM_metric=c('PearsonCorrel'),threshold = 0){
+  WM_metric<-match.arg(WM_metric)
+  df <- subset(data, subject_id == s_id & visit_id == v_id)
+  edgelist <- df[, c('from','to','weight')]
+  # edgelist<-data.frame(df[,3],df[,4],df[,5])
+  # colnames(edgelist) <- c('from','to','weight')
+  elist<-subset(edgelist,weight>threshold)
+  #finv <- function(x) 1/x
+  #elist$weight <- as.numeric(lapply(elist$weight,finv))
+  g<-graph_from_data_frame(elist,directed=TRUE)
+  g <- as.undirected(g,mode = "collapse")
+  #print(is.weighted(g))
+  g
+}
+
 #' Create a edge list  representing a subject at one visit, form one weighting scheme, at a given threshold.
 #'
 #' Create a data frame of three columns : from, to, weight. The edge list represent a patient (ex : "1-E-101-MG"), at one visit (ex : "V1"),
