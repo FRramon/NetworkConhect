@@ -56,6 +56,7 @@ makeGraphFunc <- function(data,s_id,v_id,WM_metric=c('PearsonCorrel'),threshold 
   #elist$weight <- as.numeric(lapply(elist$weight,finv))
   g<-graph_from_data_frame(elist,directed=TRUE)
   g <- as.undirected(g,mode = "collapse")
+  E(g)$weight <- E(g)$weight/2
   #print(is.weighted(g))
   g
 }
