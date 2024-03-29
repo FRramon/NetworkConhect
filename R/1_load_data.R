@@ -72,8 +72,8 @@ read_and_normalize_data <- function(data_path,WM_metric){
 #'
 #' @export
 getLUT <- function(data_path){
-  txt_path <- paste(data_path,"freesurfer_lut.txt",sep="")
-  doc <- read.table(txt_path)
+  #txt_path <- paste(data_path,"freesurfer_lut.txt",sep="")
+  doc <- read.table(data_path)
   colnames(doc) <- c('No','labelname','r','g','b','A')
   df<-as.data.frame(doc)
   df[,c('No','labelname')]
