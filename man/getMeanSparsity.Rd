@@ -4,7 +4,10 @@
 \alias{getMeanSparsity}
 \title{Return the minimum graph density across all participants and all visits}
 \usage{
-getMeanSparsity(data, WM_metric = c("FBC", "ODI", "GFA", "FA", "Fintra"))
+getMeanSparsity(
+  data,
+  WM_metric = c("FBC", "ODI", "GFA", "FA", "Fintra", "PearsonCorrel")
+)
 }
 \arguments{
 \item{data}{dataframe containing all data for one weighting scheme}

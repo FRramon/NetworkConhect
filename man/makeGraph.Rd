@@ -8,7 +8,7 @@ makeGraph(
   data,
   s_id,
   v_id,
-  WM_metric = c("FBC", "ODI", "GFA", "FA", "Fintra"),
+  WM_metric = c("FBC", "ODI", "GFA", "FA", "Fintra", "PearsonCorrel"),
   threshold = 0
 )
 }

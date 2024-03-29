@@ -7,9 +7,9 @@
 computeSW(
   data,
   v_id,
-  WM_metric = c("FBC", "ODI", "GFA", "Fintra", "FA"),
+  WM_metric = c("FBC", "ODI", "GFA", "Fintra", "FA", "PearsonCorrel"),
   eval = c("clust_coeff", "characteristic_path", "global_eff", "local_eff",
-    "smallworldeness", "richcore", "strength", "betweenness"),
+    "smallworldeness", "richcore", "strength", "betweenness", "edge_weight"),
   thresh_method,
   tvalue
 )

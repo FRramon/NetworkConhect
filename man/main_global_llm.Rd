@@ -6,7 +6,7 @@
 \usage{
 main_global_llm(
   data_path,
-  weighting_scheme = c("GFA", "FBC", "FA", "Fintra", "ODI"),
+  weighting_scheme = c("GFA", "FBC", "FA", "Fintra", "ODI", "PearsonCorrel"),
   eval = c("clust_coeff", "characteristic_path", "global_eff", "local_eff",
     "smallworldeness", "richcore", "strength", "betweenness"),
   thresh_method,
