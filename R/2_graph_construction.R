@@ -44,6 +44,7 @@ makeGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra'
 #' @param threshold float a threshold value, default = 0
 #' @returns a igraph object
 #' @export
+#'
 makeGraphFunc <- function(data,s_id,v_id,WM_metric=c('PearsonCorrel'),threshold = 0){
   WM_metric<-match.arg(WM_metric)
   df <- subset(data, subject_id == s_id & visit_id == v_id)
