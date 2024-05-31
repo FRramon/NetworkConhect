@@ -18,7 +18,7 @@
 #' @export
 computeSW <- function(data,
                       v_id,
-                      WM_metric = c('FBC','ODI','GFA','Fintra','FA','PearsonCorrel'),
+                      WM_metric,
                       eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness','edge_weight'),
                       thresh_method,
                       tvalue

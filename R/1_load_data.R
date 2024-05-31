@@ -12,7 +12,7 @@
 #'
 #'
 
-getDataDir<-function(data_path, choice = c('FBC','ODI','GFA','FA','Fintra','PearsonCorrel')){
+getDataDir<-function(data_path, choice){
 
  # data_path <- '/home/imabrain/Documents/GraphConhect/data'
   files <- list.files(data_path,recursive=FALSE)
