@@ -18,7 +18,6 @@
 #' @returns a igraph object
 #' @export
 makeGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra','PearsonCorrel'),threshold = 0){
-	WM_metric<-match.arg(WM_metric)
 	df <- subset(data, subject_id == s_id & visit_id == v_id)
   edgelist <- df[, c('from','to','weight')]
 	# edgelist<-data.frame(df[,3],df[,4],df[,5])
@@ -46,7 +45,6 @@ makeGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra'
 #' @export
 #'
 makeGraphFunc <- function(data,s_id,v_id,WM_metric=c('PearsonCorrel'),threshold = 0){
-  WM_metric<-match.arg(WM_metric)
   df <- subset(data, subject_id == s_id & visit_id == v_id)
   edgelist <- df[, c('from','to','weight')]
   # edgelist<-data.frame(df[,3],df[,4],df[,5])
@@ -75,7 +73,6 @@ makeGraphFunc <- function(data,s_id,v_id,WM_metric=c('PearsonCorrel'),threshold 
 #' @returns dataframe
 #' @export
 makeEdgelist <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra','PearsonCorrel'),threshold=0){
-	WM_metric<-match.arg(WM_metric)
 	df <- subset(data, subject_id == s_id & visit_id == v_id)
 	edgelist<-data.frame(df[,3],df[,4],df[,5])
 	colnames(edgelist) <- c('from','to','weight')
@@ -144,7 +141,6 @@ sparseThresh <- function(g, wantedDensity){
 #' @returns a igraph object
 #' @export
 makeSparseGraph <- function(data,s_id,v_id,WM_metric=c('FBC','ODI','GFA','FA','Fintra','PearsonCorrel'),wantedDensity){
-  WM_metric<-match.arg(WM_metric)
   df <- subset(data, subject_id == s_id & visit_id == v_id)
   edgelist<-data.frame(df[,3],df[,4],df[,5])
   colnames(edgelist) <- c('from','to','weight')
@@ -183,7 +179,6 @@ getMeanSparsity <- function(data,WM_metric = c('FBC','ODI','GFA','FA','Fintra','
 #' @param metric  chr the weighting scheme : "FA", "FBC", "GFA"...
 #' @export
 plot_adjacency <- function(g,WM_metric=c('FBC','ODI','GFA','FA','Fintra','PearsonCorrel')){
-	WM_metric<-match.arg(WM_metric)
 	adj <- as_adjacency_matrix(g,attr="weight",sparse = FALSE)
 	n<-vcount(g)
 	palf <- colorRampPalette(c('blue','yellow','red'))
