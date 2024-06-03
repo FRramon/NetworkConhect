@@ -45,6 +45,19 @@ smallworldeness <- function(g){
 }
 
 
+#' Compute the density of a given graph
+#'
+#' @param g graph
+#' @export
+density <- function(g){
+  n_max = (vcount(g)*(vcount(g)-1))/2
+  n_real = ecount(g)
+
+  n_real/n_max
+}
+
+
+
 #' Compute the normalized characteristic path lengthof a graph
 #'
 #'Compute the normalized characteristic path length of a graph.Normalized characteristic path length is defined by dividing characteristic path length
