@@ -104,8 +104,6 @@ computeMetric <- function(data,
   #LrsNet <- c("Default","SomMot","SalVentAttn","Vis","Limbic","Cont","DorsAttn")
   #rsNet <- LrsNet[5]
 
-
-  WM_metric<-match.arg(WM_metric)
   eval<-match.arg(eval)
   subject_ids <- get_subject_ids(data,v_id)
   RES <- vector("numeric", length(subject_ids)) # créer une nouvelle liste vide
