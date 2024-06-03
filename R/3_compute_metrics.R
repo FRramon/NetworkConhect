@@ -56,7 +56,16 @@ density <- function(g){
   n_real/n_max
 }
 
-mindensity(df,groups){
+
+#' Compute the maximal density to use as a threshold
+#'
+#' It is computed as the minimal density of graphs in the dataset
+#'
+#' @param g igraph object
+#' @param groups list of groups (ex : "V1","V2")
+#' @param WM_metric str metric of white matter for edge weighting
+#' @export
+mindensity <- function(df,groups,WM_metric){
   L <- c()
   for (group in groups){
     ids = get_subject_ids(df,group)
