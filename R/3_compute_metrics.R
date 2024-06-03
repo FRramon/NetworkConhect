@@ -74,7 +74,7 @@ mindensity <- function(df,groups,WM_metric){
       L <- c(L,density(g))
     }
   }
-  min(L)
+  L
 }
 
 #' Compute the normalized characteristic path lengthof a graph
