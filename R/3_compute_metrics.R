@@ -56,7 +56,17 @@ density <- function(g){
   n_real/n_max
 }
 
-
+mindensity(df,groups){
+  L <- c()
+  for (group in groups){
+    ids = get_subject_ids(df,group)
+    for (id in ids){
+      g <- makeGraph(df,id,group,WM_metric)
+      L <- c(L,density(g))
+    }
+  }
+  min(L)
+}
 
 #' Compute the normalized characteristic path lengthof a graph
 #'
