@@ -65,17 +65,30 @@ density <- function(g){
 #' @param groups list of groups (ex : "V1","V2")
 #' @param WM_metric str metric of white matter for edge weighting
 #' @export
-mindensity <- function(df,groups,WM_metric){
+mindensity <- function(df,groups,WM_metric,rsnet = 'All'){
   L <- c()
   for (group in groups){
     ids = get_subject_ids(df,group)
     for (id in ids){
-      g <- makeGraph(df,id,group,WM_metric)
+      if (rsnet != "All"){
+        g <- makeGraph(df,id,group,WM_metric,0)
+        i_DMN <- grep(rsnet,V(g)$name)
+        nodes_DMN <- V(g)$name[i_DMN]
+        gi <- induced_subgraph(
+          g,
+          i_DMN
+        )
+        L <- c(L,density(gi))
+      }
+    } else{
+      g <- makeGraph(df,id,group,WM_metric,0)
       L <- c(L,density(g))
+
     }
   }
   L
 }
+
 
 #' Compute the normalized characteristic path lengthof a graph
 #'
