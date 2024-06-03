@@ -82,6 +82,87 @@ computeSW <- function(data,
   RES
 }
 
+#' Compute the measure of choice for each patient in a group ("V1", "V2", or "V3)
+#'
+#' From the dataframe containing all information for one weighting scheme, this function returns a vector
+#' of n values, where n is the number of participant in a group. And the values are global measure of network topology.
+#'
+#' @param data dataframe containing all information for one weighting scheme
+#' @param v_id chr visit id, like "V1", "V3"
+#' @param metric chr the weighting scheme
+#' @param eval chr the measure to access the network topology
+#' @param threshold float a threshold if the data is computed on a specific threshold. default = 0
+#' @export
+computeMetric <- function(data,
+                          v_id,
+                          WM_metric,
+                          eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness'),
+                          thresh_method,
+                          tvalue,
+                          rsnet = "All"
+){
+  #LrsNet <- c("Default","SomMot","SalVentAttn","Vis","Limbic","Cont","DorsAttn")
+  #rsNet <- LrsNet[5]
+
+
+  WM_metric<-match.arg(WM_metric)
+  eval<-match.arg(eval)
+  subject_ids <- get_subject_ids(data,v_id)
+  RES <- vector("numeric", length(subject_ids)) # créer une nouvelle liste vide
+
+  for(j in 1:length(subject_ids)){
+    s_id <- subject_ids[j]
+    if(thresh_method == "threshold"){
+      g <- makeGraph(data,s_id,v_id,WM_metric,tvalue)
+      if (rsnet != "All"){
+        i_DMN <- grep(rsnet,V(g)$name)
+        nodes_DMN <- V(g)$name[i_DMN]
+        g <- induced_subgraph(
+          g,
+          i_DMN
+        )
+      }
+    } else if(thresh_method == "density"){
+      gT <- makeGraph(data,s_id,v_id,WM_metric,0)
+      g <- sparseThresh(gT,tvalue)
+      i_DMN <- grep(rsnet,V(g)$name)
+      if (rsnet != "All"){
+        nodes_DMN <- V(g)$name[i_DMN]
+        g <- induced_subgraph(
+          g,
+          i_DMN)
+      }
+    }
+    if(eval == 'clust_coeff'){
+      value <- transitivity(g,"global")
+      #value <- normalized_cluster_coeff(g)
+    } else if (eval == 'characteristic_path'){
+      #value <- mean_distance(g)
+      value <- mean_distance(g,weights = 1/(E(g)$weight))
+      #value <- normalized_shortest_path(g)
+    } else if (eval == 'global_eff'){
+      # value <- global_efficiency(g)
+      value <- global_efficiency(g,weights = 1/(E(g)$weight))
+    } else if (eval == 'local_eff'){
+      #value <- average_local_efficiency(g)
+      value <- average_local_efficiency(g,weights = 1/(E(g)$weight))
+    } else if (eval == 'smallworldeness'){
+      value <- smallworldeness(g)
+    } else if (eval == 'richcore'){
+      value <- rich_core(g)
+    } else if (eval =='strength'){
+      value <- mean(strength(g))
+    } else if (eval =='betweenness'){
+      value <- mean(betweenness(g))
+    }
+    RES[j] <- value
+  }
+  RES
+}
+
+
+
+
 #' Compute normalized scores
 #'
 #' Find the best transformation in order that V1 follows a normal distribution,
