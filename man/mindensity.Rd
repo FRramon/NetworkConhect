@@ -4,7 +4,7 @@
 \alias{mindensity}
 \title{Compute the maximal density to use as a threshold}
 \usage{
-mindensity(df, groups, WM_metric)
+mindensity(df, groups, WM_metric, rsnet = "All")
 }
 \arguments{
 \item{groups}{list of groups (ex : "V1","V2")}

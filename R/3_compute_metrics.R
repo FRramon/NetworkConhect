@@ -79,11 +79,10 @@ mindensity <- function(df,groups,WM_metric,rsnet = 'All'){
           i_DMN
         )
         L <- c(L,density(gi))
-      }
-    } else{
+      } else {
       g <- makeGraph(df,id,group,WM_metric,0)
       L <- c(L,density(g))
-
+      }
     }
   }
   L
