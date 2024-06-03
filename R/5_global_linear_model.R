@@ -160,6 +160,38 @@ computeMetric <- function(data,
   RES
 }
 
+#' Group all measures by group. Generalization of getData (to test)
+#'
+#' Compute each measure of network topology for each visit group (V1,V2,V3). Group this into
+#' a two columns data frame : group, y. Finally, use bestNormalize to normalize y, to ensure that
+#' the normality hypothesis is verified in Anova
+#'
+#' @param data dataframe containing all information for one weighting scheme
+#' @param metric chr the weighting scheme
+#' @param eval chr the measure to access the network topology
+#' @param threshold float a threshold if the data is computed on a specific threshold. default = 0
+#' @export
+getResultsInNetworks <- function(DF, WM_metric, eval, thresh_method, threshold, rsnet, groups) {
+  metrics <- list()
+  ids <- list()
+
+  for (group in groups) {
+    # Compute the metric for the current group
+    metrics[[group]] <- computeMetric(DF, group, WM_metric, eval, thresh_method, threshold, rsnet)
+
+    # Retrieve the subject IDs for the current group
+    ids[[group]] <- get_subject_ids(DF, group)
+  }
+
+  # Combine the results into a single data frame
+  Gdata <- data.frame(
+    ids = unlist(ids),
+    Y = unlist(metrics),
+    Group = factor(rep(groups, times = sapply(metrics, length)))
+  )
+
+  return(Gdata)
+}
 
 
 

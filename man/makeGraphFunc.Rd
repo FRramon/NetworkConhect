@@ -4,7 +4,7 @@
 \alias{makeGraphFunc}
 \title{Create a igraph object representing a subject at one visit, form one weighting scheme, at a given threshold.}
 \usage{
-makeGraphFunc(data, s_id, v_id, WM_metric = c("PearsonCorrel"), threshold = 0)
+makeGraphFunc(data, s_id, v_id, WM_metric, threshold = 0)
 }
 \arguments{
 \item{data}{dataframe containing all data for one weighting scheme}

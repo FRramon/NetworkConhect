@@ -4,13 +4,7 @@
 \alias{makeEdgelist}
 \title{Create a edge list  representing a subject at one visit, form one weighting scheme, at a given threshold.}
 \usage{
-makeEdgelist(
-  data,
-  s_id,
-  v_id,
-  WM_metric = c("FBC", "ODI", "GFA", "FA", "Fintra", "PearsonCorrel"),
-  threshold = 0
-)
+makeEdgelist(data, s_id, v_id, WM_metric, threshold = 0)
 }
 \arguments{
 \item{data}{dataframe containing all data for one weighting scheme}

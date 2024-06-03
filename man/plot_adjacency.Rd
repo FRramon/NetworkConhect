@@ -4,10 +4,7 @@
 \alias{plot_adjacency}
 \title{Plot the adjacency matric of a graph}
 \usage{
-plot_adjacency(
-  g,
-  WM_metric = c("FBC", "ODI", "GFA", "FA", "Fintra", "PearsonCorrel")
-)
+plot_adjacency(g, WM_metric)
 }
 \arguments{
 \item{g}{igraph object}
