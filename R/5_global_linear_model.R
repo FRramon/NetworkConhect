@@ -121,14 +121,15 @@ computeMetric <- function(data,
         )
       }
     } else if(thresh_method == "density"){
-      gT <- makeGraph(data,s_id,v_id,WM_metric,0)
-      g <- sparseThresh(gT,tvalue)
+      g <- makeGraph(data,s_id,v_id,WM_metric,0)
+      #g <- sparseThresh(gT,tvalue)
       i_DMN <- grep(rsnet,V(g)$name)
       if (rsnet != "All"){
         nodes_DMN <- V(g)$name[i_DMN]
-        g <- induced_subgraph(
+        gT <- induced_subgraph(
           g,
           i_DMN)
+        g <- sparseThresh(gT,tvalue)
       }
     }
     if(eval == 'clust_coeff'){
