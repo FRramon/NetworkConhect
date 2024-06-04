@@ -19,7 +19,7 @@ library(dplyr)
 #' @param thresh_method either "threshold" for absolut thresholding, or "density" for density thresholding
 #' @param tvalue either the value of the absolute threshold or density threshold
 #' @export
-computeSparseMetric <- function(data,
+computeLocalMetric <- function(data,
                                 v_id,
                                 WM_metric,
                                 eval = c("degree","clust_coeff","strength","betweenness","closeness","eigen","efficiency"),
@@ -63,6 +63,72 @@ computeSparseMetric <- function(data,
   }
   RES
 }
+
+#' Compute the local measure of choice for each patient in a group ("V1", "V2", or "V3) and perform the group level statistical analysis
+#'
+#' Fit a linear mixed model for each region of interest (local metric as dependent variable, group as independant variable, and subject id as random effect to account for repetitive data)
+#' Use correction for multiple comparison (bonferronni, fdr)
+#'
+#' @param df dataframe containing all information for one weighting scheme
+#' @param group_mist chr visit id, like "V1", "V3"
+#' @param WM_metric chr the weighting scheme
+#' @param eval chr the measure to access the network topology
+#' @param thresh_method either "threshold" for absolute thresholding, or "density" for density thresholding
+#' @param tvalue either the value of the absolute threshold or density threshold
+#' @export
+main_group_local_metrics_analysis <- function(df,
+                                              group_list,
+                                              WM_metric,
+                                              eval = c("degree","clust_coeff","strength","betweenness","closeness","eigen","efficiency"),
+                                              thresh_method,
+                                              tvalue){
+
+  ## Compute local metrics for all groups
+  L1 <- computeLocalMetric(df,group_list[1],WM_metric,eval,thresh_method,tvalue)
+  L2 <- computeLocalMetric(df,group_list[2],WM_metric,eval,thresh_method,tvalue)
+  L3 <- computeLocalMetric(df,group_list[3],WM_metric,eval,thresh_method,tvalue)
+
+  # get the labels of the nodes
+  all_nodes <- c(rownames(L1),rownames(L2),rownames(L3))
+  counts_nodes <- table(all_nodes)
+  all_nodes_once <- unique(all_nodes)
+
+  pvalue_list <- c()
+  for(node in all_nodes_once){
+    # for each node, create the dataframe structure with correspondant metric, group and subject id
+    d1 <- as.list(data.frame(L1[node,]))[[1]]
+    d2 <- as.list(data.frame(L2[node,]))[[1]]
+    d3 <- as.list(data.frame(L3[node,]))[[1]]
+
+    Gdata <- data.frame(
+      subject_id = c(get_subject_ids(df,"V1"),get_subject_ids(df,"V2"),get_subject_ids(df,"V3")),
+      Y=c(d1,d2,d3),
+      Group =factor(rep(c("V1", "V2", "V3"), times=c(length(d1), length(d2), length(d3))))
+    )
+
+    # Fit a linear mixed model (random effect as subjecct identificator)
+    res.lm <- lmer(Y ~ Group + (1|subject_id),data = Gdata)
+    pvalue_list <- c(pvalue_list,Anova(res.lm)[,"Pr(>Chisq)"])
+
+  }
+
+  # Adjust the n linear models pvalues with FWER method, such as bonferroni (restrictive), of false discovery rate (more permissive)
+  padjusted_bonferroni <- p.adjust(pvalue_list,method = 'bonferroni')
+  padjusted_fdr <- p.adjust(pvalue_list,method = 'fdr')
+
+  res_dataframe <- data.frame(
+    roi = all_nodes_once,
+    uncorrected_pvalues = pvalue_list,
+    pval_bonferroni = padjusted_bonferroni,
+    pval_fdr = padjusted_fdr
+  )
+
+  ## Return only significant regions of interest.
+  significant_rois <- res_dataframe[res_dataframe$uncorrected_pvalues < 0.05,]
+  significant_rois
+
+}
+
 
 # K_analysis <- function(Gdata){
 #   f <- as.formula(paste(colnames(Gdata[1]), "~ Group"))
