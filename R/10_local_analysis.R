@@ -125,10 +125,40 @@ main_group_local_metrics_analysis <- function(df,
 
   ## Return only significant regions of interest.
   significant_rois <- res_dataframe[res_dataframe$uncorrected_pvalues < 0.05,]
-  significant_rois
+  list("L1" = L1,"L2" = L2,"L3" = L3,"significant_rois" = significant_rois)
 
 }
 
+#' This function compute metrics for one node in particular
+#' It need the main_group_local_analysis function to have run
+#'
+#' @param df dataframe containing all information for one weighting scheme
+#' @param L1 matrix containing as column as subjects, as rows as nodes. L1 is for V1
+#' @param L1 matrix containing as column as subjects, as rows as nodes. L1 is for V1
+#' @param L1 matrix containing as column as subjects, as rows as nodes. L1 is for V1
+#' @param node str containing the name of the node in the atlas
+#' @export
+get_one_local_result <- function(df,
+                                 L1,
+                                 L2,
+                                 L3,
+                                 node
+                                 ){
+
+  d1 <- as.list(data.frame(L1[node,]))[[1]]
+  d2 <- as.list(data.frame(L2[node,]))[[1]]
+  d3 <- as.list(data.frame(L3[node,]))[[1]]
+
+  Gdata <- data.frame(
+    subject_id = c(get_subject_ids(df,"V1"),get_subject_ids(df,"V2"),get_subject_ids(df,"V3")),
+    Y=c(d1,d2,d3),
+    Group =factor(rep(c("V1", "V2", "V3"), times=c(length(d1), length(d2), length(d3))))
+  )
+
+  Gdata
+
+
+}
 
 # K_analysis <- function(Gdata){
 #   f <- as.formula(paste(colnames(Gdata[1]), "~ Group"))
