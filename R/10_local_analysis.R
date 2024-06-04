@@ -123,9 +123,11 @@ main_group_local_metrics_analysis <- function(df,
     pval_fdr = padjusted_fdr
   )
 
+  sentence_method = paste("Networks were weighted using ",WM_metric," and thresholded using technique ",thresh_method, " with value ",tvalue,". ",eval," was computed for all nodes. For statistical analysis, one linear mixed models wa used for each node, with node local metric set as the dependent variable, visits as the independent variable, and subject identificators as the random variable. Finally, multiple comparison correction were done using FDR and/or bonferroni.")
+
   ## Return only significant regions of interest.
   significant_rois <- res_dataframe[res_dataframe$uncorrected_pvalues < 0.05,]
-  list("L1" = L1,"L2" = L2,"L3" = L3,"significant_rois" = significant_rois)
+  list("L1" = L1,"L2" = L2,"L3" = L3,"significant_rois" = significant_rois,"method" = sentence_method)
 
 }
 
