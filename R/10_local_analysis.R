@@ -157,7 +157,6 @@ get_one_local_result <- function(df,
 
   Gdata
 
-
 }
 
 # K_analysis <- function(Gdata){
