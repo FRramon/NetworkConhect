@@ -106,7 +106,7 @@ main_group_local_metrics_analysis <- function(df,
     Gdata <- data.frame(
       subject_id = c(get_subject_ids(df,"V1"),get_subject_ids(df,"V2"),get_subject_ids(df,"V3")),
       Y=c(d1,d2,d3),
-      Group =factor(rep(c("V1", "V2", "V3"), times=c(length(d1), length(d2), length(d3)))),
+      Group =factor(rep(c("V1", "V2", "V3"), times=c(length(d1), length(d2), length(d3))))
     )
 
 
