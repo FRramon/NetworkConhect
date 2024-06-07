@@ -115,7 +115,7 @@ main_group_local_metrics_analysis <- function(df,
 
 
     # Fit a linear mixed model (random effect as subjecct identificator)
-    res.lm <- lmer(Y ~ visit_id + area_from  (1|subject_id) ,data = Gdata)
+    res.lm <- lmer(Y ~ visit_id + area_from + (1|subject_id) ,data = Gdata)
     pvalue_list <- c(pvalue_list,Anova(res.lm)[,"Pr(>Chisq)"])
 
   }
@@ -131,7 +131,7 @@ main_group_local_metrics_analysis <- function(df,
     pval_fdr = padjusted_fdr
   )
 
-  sentence_method = paste("Networks were weighted using ",WM_metric," and thresholded using technique ",thresh_method, " with value ",tvalue,". ",eval," was computed for all nodes. For statistical analysis, one linear mixed models wa used for each node, with node local metric set as the dependent variable, visits as the independent variable, and subject identificators as the random variable. Finally, multiple comparison correction were done using FDR and/or bonferroni.")
+  sentence_method = paste("Networks were weighted using ",WM_metric," and thresholded using technique ",thresh_method, " with value ",tvalue,". ",eval," was computed for all nodes. For statistical analysis, one linear mixed models wa used for each node, with node local metric set as the dependent variable, visits as the independent variable, and subject identificators as the random variable. Area of the region was added as a covariate. Finally, multiple comparison correction were done using FDR and/or bonferroni.")
 
   ## Return only significant regions of interest.
   significant_rois <- res_dataframe[res_dataframe$uncorrected_pvalues < 0.05,]
