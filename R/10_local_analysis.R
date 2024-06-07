@@ -106,7 +106,7 @@ main_group_local_metrics_analysis <- function(df,
     Gdata <- data.frame(
       subject_id = c(get_subject_ids(df,"V1"),get_subject_ids(df,"V2"),get_subject_ids(df,"V3")),
       Y=c(d1,d2,d3),
-      Group =factor(rep(c("V1", "V2", "V3"), times=c(length(d1), length(d2), length(d3))))
+      visit_id =factor(rep(c("V1", "V2", "V3"), times=c(length(d1), length(d2), length(d3))))
     )
 
 
@@ -115,7 +115,7 @@ main_group_local_metrics_analysis <- function(df,
 
 
     # Fit a linear mixed model (random effect as subjecct identificator)
-    res.lm <- lmer(Y ~ Group + area_from  (1|subject_id) ,data = Gdata)
+    res.lm <- lmer(Y ~ visit_id + area_from  (1|subject_id) ,data = Gdata)
     pvalue_list <- c(pvalue_list,Anova(res.lm)[,"Pr(>Chisq)"])
 
   }
