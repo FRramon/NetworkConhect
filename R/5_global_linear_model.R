@@ -173,6 +173,8 @@ computeMetric <- function(data,
 getResultsInNetworks <- function(DF, WM_metric, eval, thresh_method, threshold, rsnet, groups) {
   metrics <- list()
   ids <- list()
+  ages <- list()
+  sexes <- list()
 
   for (group in groups) {
     # Compute the metric for the current group
@@ -180,13 +182,19 @@ getResultsInNetworks <- function(DF, WM_metric, eval, thresh_method, threshold, 
 
     # Retrieve the subject IDs for the current group
     ids[[group]] <- get_subject_ids(DF, group)
+
+    ages[[group]] <- DF %>% filter(subject_id %in% ids[[group]]) %>% select(age) %>% pull()
+    sexes[[group]] <- DF %>% filter(subject_id %in% ids[[group]]) %>% select(sex) %>% pull()
+
   }
 
   # Combine the results into a single data frame
   Gdata <- data.frame(
     ids = unlist(ids),
     Y = unlist(metrics),
-    Group = factor(rep(groups, times = sapply(metrics, length)))
+    Group = factor(rep(groups, times = sapply(metrics, length))),
+    age = unlist(ages),
+    sex = unlist(sexes)
   )
 
   return(Gdata)
