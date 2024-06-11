@@ -110,12 +110,12 @@ main_group_local_metrics_analysis <- function(df,
     )
     # Select relevant columns to avoid duplication
 #    df_reduced <- df %>% select(subject_id, visit_id, age, sex, area_from)
-    df_reduced <- df %>% select(subject_id, visit_id, area_from)
+    #df_reduced <- df %>% select(subject_id, visit_id)
 
 
     # Merge age and sex information into Gdata
-    Gdata <- Gdata %>%
-      left_join(df_reduced, by = c("subject_id", "visit_id"))
+    #Gdata <- Gdata %>%
+     # left_join(df_reduced, by = c("subject_id", "visit_id"))
 
 
     # Gdata <- Gdata %>%
@@ -123,7 +123,7 @@ main_group_local_metrics_analysis <- function(df,
 
 
     # Fit a linear mixed model (random effect as subjecct identificator)
-    res.lm <- lmer(Y ~ visit_id + area_from + (1|subject_id) ,data = Gdata)
+    res.lm <- lmer(Y ~ visit_id + (1|subject_id) ,data = Gdata)
     pvalue_list <- c(pvalue_list,Anova(res.lm)[,"Pr(>Chisq)"])
 
   }
