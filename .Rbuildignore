@@ -1,2 +1,6 @@
 ^NetworkConhect\.Rproj$
 ^\.Rproj\.user$
+.readthedocs.yaml
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
