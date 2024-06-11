@@ -117,7 +117,7 @@ main_group_local_metrics_analysis <- function(df,
     Gdata <- Gdata %>%
       left_join(df_reduced, by = c("subject_id", "visit_id"))
 
-s
+
     # Gdata <- Gdata %>%
     #   left_join(df,by = c("subject_id","visit_id"))
 
