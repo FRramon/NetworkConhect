@@ -5,6 +5,7 @@ library(igraph)
 #library(PMCMRplus)
 library(reshape2)
 library(dplyr)
+library(lmerTest)
 #library(NetworkConhect)
 
 
@@ -124,8 +125,9 @@ main_group_local_metrics_analysis <- function(df,
 
     # Fit a linear mixed model (random effect as subjecct identificator)
     res.lm <- lmer(Y ~ visit_id + (1|subject_id) ,data = Gdata)
-    print(summary(res.lm)[,"Pr(>F"][1])
-    pvalue_list <- c(pvalue_list,summary(res.lm)[,"Pr(>F"][1])
+    pval <- Anova(res.lm)[,"Pr(>Chisq)"]
+    print(pval)
+    pvalue_list <- c(pvalue_list,pval)
 
   }
 
