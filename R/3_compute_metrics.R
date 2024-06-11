@@ -45,6 +45,29 @@ smallworldeness <- function(g){
 }
 
 
+
+#' Function to perform a random walk on a weighted graph with inverted weights
+#' @param g the weighted graph
+#' @export
+random_walk_length <- function(g) {
+  # Inverse the weights of the edges
+  E(g)$weight <- 1 / E(g)$weight
+
+  # Perform random walks and calculate their lengths
+  walk_lengths <- purrr::map(
+    .x = 1:15000,
+    .f = function(x) {
+      walk <- random_walk(g, start = x, steps = 1000, mode = "all", stuck = "return")
+      length(walk) # Get the length of the walk
+    }
+  )
+
+  # Calculate the mean length of the random walks
+  mean_length <- mean(unlist(walk_lengths))
+
+  return(mean_length)
+}
+
 #' Compute the density of a given graph
 #'
 #' @param g graph
