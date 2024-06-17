@@ -131,6 +131,9 @@ computeMetric <- function(data,
           i_DMN)
         g <- sparseThresh(gT,tvalue)
       }
+      else{
+        g <- sparseThresh(g,tvalue)
+      }
     }
     if(eval == 'clust_coeff'){
       value <- transitivity(g,"global")
