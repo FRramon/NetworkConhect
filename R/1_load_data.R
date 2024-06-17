@@ -34,7 +34,7 @@ getDataDir<-function(data_path, choice){
 #' @export
 read_and_normalize_data <- function(data_path,WM_metric){
   data_full <- read_excel(data_path)
-  if(WM_metric=='FBC'){
+  if(WM_metric=='SC'){
     # drois <- separateRois(data_full)
     # weight: 9 for fiber density, 8 for distance, 5 for streamline count
     #print("select streamline count")

@@ -64,7 +64,7 @@ random_walk_length <- function(g, num_walks = 1000, walk_length = 1000) {
     .x = starting_points,
     .f = function(x) {
       walk <- random_walk(g, start = x, steps = walk_length, mode = "all", stuck = "return")
-      length(walk) # Get the length of the walk
+      print(length(walk)) # Get the length of the walk
     }
   )
 
