@@ -133,6 +133,7 @@ computeMetric <- function(data,
       }
       else{
         g <- sparseThresh(g,tvalue)
+        print(density(g))
       }
     }
     if(eval == 'clust_coeff'){
