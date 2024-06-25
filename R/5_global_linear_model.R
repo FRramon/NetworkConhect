@@ -19,7 +19,7 @@
 computeSW <- function(data,
                       v_id,
                       WM_metric,
-                      eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness','edge_weight'),
+                      eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness','edge_weight','communicability'),
                       thresh_method,
                       tvalue
 ){
@@ -76,6 +76,8 @@ computeSW <- function(data,
       value <- mean(betweenness(g))
     } else if (eval == "edge_weight"){
       value <- mean(E(g)$weight)
+    } else if (eval == "communicability"){
+    value <- brainGraph::communicability(g,weights = 1/E(g)$weight)
     }
     RES[j] <- value
   }
@@ -96,7 +98,7 @@ computeSW <- function(data,
 computeMetric <- function(data,
                           v_id,
                           WM_metric,
-                          eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness'),
+                          eval = c('clust_coeff','characteristic_path','global_eff','local_eff','smallworldeness','richcore','strength','betweenness','edge_weight','communicability'),
                           thresh_method,
                           tvalue,
                           rsnet = "All"
@@ -157,6 +159,10 @@ computeMetric <- function(data,
       value <- mean(strength(g))
     } else if (eval =='betweenness'){
       value <- mean(betweenness(g))
+    }else if (eval == "edge_weight"){
+      value <- mean(E(g)$weight)
+    } else if (eval == "communicability"){
+      value <- brainGraph::communicability(g,weights = 1/E(g)$weight)
     }
     RES[j] <- value
   }
