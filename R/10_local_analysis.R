@@ -71,7 +71,7 @@ computeLocalMetric <- function(data,
 #' Use correction for multiple comparison (bonferronni, fdr)
 #'
 #' @param df dataframe containing all information for one weighting scheme
-#' @param group_mist chr visit id, like "V1", "V3"
+#' @param group_list chr visit id, like "V1", "V3"
 #' @param WM_metric chr the weighting scheme
 #' @param eval chr the measure to access the network topology
 #' @param thresh_method either "threshold" for absolute thresholding, or "density" for density thresholding
@@ -118,10 +118,8 @@ main_group_local_metrics_analysis <- function(df,
     #Gdata <- Gdata %>%
      # left_join(df_reduced, by = c("subject_id", "visit_id"))
 
-
     # Gdata <- Gdata %>%
     #   left_join(df,by = c("subject_id","visit_id"))
-
 
     # Fit a linear mixed model (random effect as subjecct identificator)
     res.lm <- lmer(Y ~ visit_id + (1|subject_id) ,data = Gdata)
@@ -146,7 +144,7 @@ main_group_local_metrics_analysis <- function(df,
 
   ## Return only significant regions of interest.
   significant_rois <- res_dataframe[res_dataframe$uncorrected_pvalues < 0.05,]
-  list("L1" = L1,"L2" = L2,"L3" = L3,"significant_rois" = significant_rois,"method" = sentence_method)
+  list("L1" = L1,"L2" = L2,"L3" = L3,"significant_rois" = significant_rois,"method" = sentence_method,"last_lm" = res.lm)
 
 }
 
