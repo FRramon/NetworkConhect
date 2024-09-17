@@ -125,8 +125,7 @@ main_group_local_metrics_analysis <- function(df,
     # Fit a linear mixed model (random effect as subjecct identificator)
     res.lm <- lmer(Y ~ visit_id + (1|subject_id) ,data = Gdata)
     pval <- Anova(res.lm)[,"Pr(>Chisq)"]
-    s <- summary(res.lm)
-    tstat <- S$coefficients[,'t value'][3]
+    tstat <- summary(res.lm)$coefficients[,'t value'][3]
     print(pval)
     tstat_list <- c(tstat_list,tstat)
     pvalue_list <- c(pvalue_list,pval)
