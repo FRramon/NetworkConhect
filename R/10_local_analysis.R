@@ -98,6 +98,7 @@ main_group_local_metrics_analysis <- function(df,
 
 
   pvalue_list <- c()
+  tstat_list <- c()
   for(node in all_nodes_once){
     # for each node, create the dataframe structure with correspondant metric, group and subject id
     d1 <- as.list(data.frame(L1[node,]))[[1]]
@@ -124,7 +125,10 @@ main_group_local_metrics_analysis <- function(df,
     # Fit a linear mixed model (random effect as subjecct identificator)
     res.lm <- lmer(Y ~ visit_id + (1|subject_id) ,data = Gdata)
     pval <- Anova(res.lm)[,"Pr(>Chisq)"]
+    s <- summary(res.lm)
+    tstat <- S$coefficients[,'t value'][3]
     print(pval)
+    tstat_list <- c(tstat_list,tstat)
     pvalue_list <- c(pvalue_list,pval)
 
   }
@@ -135,6 +139,7 @@ main_group_local_metrics_analysis <- function(df,
 
   res_dataframe <- data.frame(
     roi = all_nodes_once,
+    tstat = tstat_list,
     uncorrected_pvalues = pvalue_list,
     pval_bonferroni = padjusted_bonferroni,
     pval_fdr = padjusted_fdr
@@ -144,7 +149,7 @@ main_group_local_metrics_analysis <- function(df,
 
   ## Return only significant regions of interest.
   significant_rois <- res_dataframe[res_dataframe$uncorrected_pvalues < 0.05,]
-  list("L1" = L1,"L2" = L2,"L3" = L3,"significant_rois" = significant_rois,"method" = sentence_method,"last_lm" = res.lm)
+  list("L1" = L1,"L2" = L2,"L3" = L3,"significant_rois" = significant_rois,"res_dataframe" = res_dataframe,"method" = sentence_method)
 
 }
 
