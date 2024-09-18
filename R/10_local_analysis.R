@@ -50,12 +50,11 @@ computeLocalMetric <- function(data,
       value <- transitivity(g,'weighted')
       names(value) <- V(g)$name
     } else if (eval =='strength'){
+      print("strength func")
       value <- strength(g,weights = 1/(E(g)$weight))
     } else if (eval =='betweenness'){
       value <- betweenness(g,weights = 1/(E(g)$weight))
     } else if (eval == 'closeness'){
-      print("closeness")
-      print("bla")
       value <- closeness(g)
     } else if (eval == 'eigen'){
       value <- eigen_centrality(g,weights = 1/(E(g)$weight))$vector
@@ -84,6 +83,7 @@ main_group_local_metrics_analysis <- function(df,
                                               thresh_method,
                                               tvalue){
 
+  print(eval)
   ## Compute local metrics for all groups
   L1 <- computeLocalMetric(df,group_list[1],WM_metric,eval,thresh_method,tvalue)
   L2 <- computeLocalMetric(df,group_list[2],WM_metric,eval,thresh_method,tvalue)
