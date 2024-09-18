@@ -50,7 +50,6 @@ computeLocalMetric <- function(data,
       value <- transitivity(g,'weighted')
       names(value) <- V(g)$name
     } else if (eval =='strength'){
-      print("strength func")
       value <- strength(g,weights = 1/(E(g)$weight))
     } else if (eval =='betweenness'){
       value <- betweenness(g,weights = 1/(E(g)$weight))
@@ -83,7 +82,6 @@ main_group_local_metrics_analysis <- function(df,
                                               thresh_method,
                                               tvalue){
 
-  print(eval)
   ## Compute local metrics for all groups
   L1 <- computeLocalMetric(df,group_list[1],WM_metric,eval,thresh_method,tvalue)
   L2 <- computeLocalMetric(df,group_list[2],WM_metric,eval,thresh_method,tvalue)
@@ -126,7 +124,6 @@ main_group_local_metrics_analysis <- function(df,
     res.lm <- lmer(Y ~ visit_id + (1|subject_id) ,data = Gdata)
     pval <- Anova(res.lm)[,"Pr(>Chisq)"]
     tstat <- summary(res.lm)$coefficients[,'t value'][3]
-    print(pval)
     tstat_list <- c(tstat_list,tstat)
     pvalue_list <- c(pvalue_list,pval)
 
