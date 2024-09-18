@@ -50,13 +50,13 @@ computeLocalMetric <- function(data,
       value <- transitivity(g,'weighted')
       names(value) <- V(g)$name
     } else if (eval =='strength'){
-      value <- strength(g)
+      value <- strength(g,weights = 1/(E(g)$weight))
     } else if (eval =='betweenness'){
-      value <- betweenness(g)
+      value <- betweenness(g,weights = 1/(E(g)$weight))
     } else if (eval == 'closeness'){
-      value <- closeness(g)
+      value <- closeness(g,weights = 1/(E(g)$weight))
     } else if (eval == 'eigen'){
-      value <- eigen_centrality(g)$vector
+      value <- eigen_centrality(g,weights = 1/(E(g)$weight))$vector
     } else if (eval == 'efficiency'){
       value <- efficiency(g,"nodal")
     }
