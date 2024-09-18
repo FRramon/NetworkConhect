@@ -55,6 +55,7 @@ computeLocalMetric <- function(data,
       value <- betweenness(g,weights = 1/(E(g)$weight))
     } else if (eval == 'closeness'){
       print("closeness")
+      print("bla")
       value <- closeness(g)
     } else if (eval == 'eigen'){
       value <- eigen_centrality(g,weights = 1/(E(g)$weight))$vector
