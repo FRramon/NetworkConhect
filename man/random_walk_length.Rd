@@ -4,7 +4,7 @@
 \alias{random_walk_length}
 \title{Function to perform a random walk on a weighted graph with inverted weights}
 \usage{
-random_walk_length(g)
+random_walk_length(g, num_walks = 1000, walk_length = 1000)
 }
 \arguments{
 \item{g}{the weighted graph}

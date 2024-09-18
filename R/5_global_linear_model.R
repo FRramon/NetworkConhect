@@ -161,8 +161,6 @@ computeMetric <- function(data,
       value <- mean(betweenness(g))
     }else if (eval == "edge_weight"){
       value <- mean(E(g)$weight)
-    } else if (eval == "communicability"){
-      value <- brainGraph::communicability(g,weights = 1/E(g)$weight)
     }
     RES[j] <- value
   }

@@ -17,6 +17,8 @@ main_group_local_metrics_analysis(
 \arguments{
 \item{df}{dataframe containing all information for one weighting scheme}
 
+\item{group_list}{chr visit id, like "V1", "V3"}
+
 \item{WM_metric}{chr the weighting scheme}
 
 \item{eval}{chr the measure to access the network topology}
@@ -24,8 +26,6 @@ main_group_local_metrics_analysis(
 \item{thresh_method}{either "threshold" for absolute thresholding, or "density" for density thresholding}
 
 \item{tvalue}{either the value of the absolute threshold or density threshold}
-
-\item{group_mist}{chr visit id, like "V1", "V3"}
 }
 \description{
 Fit a linear mixed model for each region of interest (local metric as dependent variable, group as independant variable, and subject id as random effect to account for repetitive data)

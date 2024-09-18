@@ -9,8 +9,7 @@ computeLocalMetric(
   data,
   v_id,
   WM_metric,
-  eval = c("degree", "clust_coeff", "strength", "betweenness", "closeness", "eigen",
-    "efficiency"),
+  eval = c("degree", "clust_coeff", "strength", "betweenness", "closeness", "eigen"),
   thresh_method,
   tvalue
 )

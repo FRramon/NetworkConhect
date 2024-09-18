@@ -9,7 +9,8 @@ computeSW(
   v_id,
   WM_metric,
   eval = c("clust_coeff", "characteristic_path", "global_eff", "local_eff",
-    "smallworldeness", "richcore", "strength", "betweenness", "edge_weight"),
+    "smallworldeness", "richcore", "strength", "betweenness", "edge_weight",
+    "communicability"),
   thresh_method,
   tvalue
 )
