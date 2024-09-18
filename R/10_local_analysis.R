@@ -6,7 +6,6 @@ library(igraph)
 library(reshape2)
 library(dplyr)
 library(lmerTest)
-library(brainGraph)
 #library(NetworkConhect)
 
 
@@ -59,7 +58,7 @@ computeLocalMetric <- function(data,
     } else if (eval == 'eigen'){
       value <- eigen_centrality(g)$vector
     } else if (eval == 'efficiency'){
-      value <- brainGraph::efficiency(g,"nodal")
+      value <- efficiency(g,"nodal")
     }
     RES<- cbind(RES,value)
   }
