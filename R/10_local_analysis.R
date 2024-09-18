@@ -23,7 +23,7 @@ library(lmerTest)
 computeLocalMetric <- function(data,
                                 v_id,
                                 WM_metric,
-                                eval = c("degree","clust_coeff","strength","betweenness","closeness","eigen","efficiency"),
+                                eval = c("degree","clust_coeff","strength","betweenness","closeness","eigen"),
                                 thresh_method,
                                 tvalue
                                 ){
@@ -57,8 +57,6 @@ computeLocalMetric <- function(data,
       value <- closeness(g,weights = 1/(E(g)$weight))
     } else if (eval == 'eigen'){
       value <- eigen_centrality(g,weights = 1/(E(g)$weight))$vector
-    } else if (eval == 'efficiency'){
-      value <- efficiency(g,"nodal")
     }
     RES<- cbind(RES,value)
   }
