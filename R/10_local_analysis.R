@@ -94,7 +94,7 @@ main_group_local_metrics_analysis <- function(df,
   L1 <- computeLocalMetric(df,group_list[1],WM_metric,eval,thresh_method,tvalue)
   L2 <- computeLocalMetric(df,group_list[2],WM_metric,eval,thresh_method,tvalue)
   print(L2)
-  print(lenght(L2))
+  print(length(L2))
   print(dim(L2))
   L3 <- computeLocalMetric(df,group_list[3],WM_metric,eval,thresh_method,tvalue)
 
