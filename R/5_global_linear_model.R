@@ -138,29 +138,46 @@ computeMetric <- function(data,
         print(density(g))
       }
     }
-    if(eval == 'clust_coeff'){
+    if(eval == 'clust_coeff'& WM_metric != 'odi'){
       value <- transitivity(g,"global")
       #value <- normalized_cluster_coeff(g)
-    } else if (eval == 'characteristic_path'){
+    } else if (eval == 'characteristic_path'& WM_metric != 'odi'){
       #value <- mean_distance(g)
       value <- mean_distance(g,weights = 1/(E(g)$weight))
       #value <- normalized_shortest_path(g)
-    } else if (eval == 'global_eff'){
+    } else if (eval == 'global_eff' & WM_metric != 'odi'){
       # value <- global_efficiency(g)
       value <- global_efficiency(g,weights = 1/(E(g)$weight))
-    } else if (eval == 'local_eff'){
+    } else if (eval == 'local_eff'& WM_metric != 'odi'){
       #value <- average_local_efficiency(g)
       value <- average_local_efficiency(g,weights = 1/(E(g)$weight))
-    } else if (eval == 'smallworldeness'){
+    } else if (eval == 'smallworldeness'& WM_metric != 'odi'){
       value <- smallworldeness(g)
-    } else if (eval == 'richcore'){
+    } else if (eval == 'richcore'& WM_metric != 'odi'){
       value <- rich_core(g)
-    } else if (eval =='strength'){
-      value <- mean(strength(g))
-    } else if (eval =='betweenness'){
-      value <- mean(betweenness(g))
-    }else if (eval == "edge_weight"){
+    } else if (eval =='strength'& WM_metric != 'odi'){
+      value <- mean(strength(g,weights = 1/(E(g)$weight)))
+    } else if (eval =='betweenness'& WM_metric != 'odi'){
+      value <- mean(betweenness(g,weights = 1/(E(g)$weight)))
+    }else if (eval == "edge_weight"& WM_metric != 'odi'){
       value <- mean(E(g)$weight)
+    }else if(eval == 'clust_coeff'& WM_metric == 'odi'){
+      value <- transitivity(g,"global")
+      #value <- normalized_cluster_coeff(g)
+    } else if (eval == 'characteristic_path'& WM_metric == 'odi'){
+      #value <- mean_distance(g)
+      value <- mean_distance(g)
+      #value <- normalized_shortest_path(g)
+    } else if (eval == 'global_eff' & WM_metric == 'odi'){
+      # value <- global_efficiency(g)
+      value <- global_efficiency(g)
+    } else if (eval == 'local_eff'& WM_metric == 'odi'){
+      #value <- average_local_efficiency(g)
+      value <- average_local_efficiency(g)
+    } else if (eval == 'strength' & WM_metric == 'odi'){
+      value <- strength(g)
+    }else if (eval =='betweenness'& WM_metric == 'odi'){
+      value <- mean(betweenness(g))
     }
     RES[j] <- value
   }
