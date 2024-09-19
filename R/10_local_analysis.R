@@ -49,14 +49,22 @@ computeLocalMetric <- function(data,
       g <- delete_vertices(g,Isolated)
       value <- transitivity(g,'weighted')
       names(value) <- V(g)$name
-    } else if (eval =='strength'){
+    } else if (eval =='strength' & WM_metric != 'odi'){
       value <- strength(g,weights = 1/(E(g)$weight))
-    } else if (eval =='betweenness'){
+    } else if (eval =='betweenness' & WM_metric != 'odi'){
       value <- betweenness(g,weights = 1/(E(g)$weight))
-    } else if (eval == 'closeness'){
+    } else if (eval == 'closeness' & WM_metric != 'odi'){
       value <- closeness(g,weights = 1/(E(g)$weight))
-    } else if (eval == 'eigen'){
+    } else if (eval == 'eigen' & WM_metric != 'odi'){
       value <- eigen_centrality(g,weights = 1/(E(g)$weight))$vector
+    } else if (eval =='strength' & WM_metric == 'odi'){
+      value <- strength(g)
+    } else if (eval =='betweenness' & WM_metric == 'odi'){
+      value <- betweenness(g)
+    } else if (eval == 'closeness' & WM_metric == 'odi'){
+      value <- closeness(g)
+    } else if (eval == 'eigen' & WM_metric == 'odi'){
+      value <- eigen_centrality(g)$vector
     }
     RES<- cbind(RES,value)
   }
