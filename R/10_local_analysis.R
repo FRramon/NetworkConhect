@@ -115,7 +115,7 @@ main_group_local_metrics_analysis <- function(df,
   for(node in all_nodes_once){
     # for each node, create the dataframe structure with correspondant metric, group and subject id
     d1 <- as.list(data.frame(L1[node,]))[[1]]
-    d2 <- as.list(data.frame(L2[node,]))[[1]]
+    #d2 <- as.list(data.frame(L2[node,]))[[1]]
     d3 <- as.list(data.frame(L3[node,]))[[1]]
 
     Gdata <- data.frame(
