@@ -171,7 +171,7 @@ get_one_local_result <- function(df,
                                  L2,
                                  L3,
                                  node
-                                 ){
+){
 
   d1 <- as.list(data.frame(L1[node,]))[[1]]
   d2 <- as.list(data.frame(L2[node,]))[[1]]
@@ -182,6 +182,13 @@ get_one_local_result <- function(df,
     Y=c(d1,d2,d3),
     Group =factor(rep(c("V1", "V2", "V3"), times=c(length(d1), length(d2), length(d3))))
   )
+  colnames(Gdata) <- c("subject_id","Y","visit_id")
+
+  Gdata <- Gdata %>%
+    inner_join(df, by = c("subject_id", "visit_id")) %>%
+    select(subject_id, visit_id, Y, age, sex) %>%
+    distinct()
+
 
   Gdata
 
