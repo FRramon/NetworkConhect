@@ -92,15 +92,8 @@ main_group_local_metrics_analysis <- function(df,
 
   ## Compute local metrics for all groups
   L1 <- computeLocalMetric(df,group_list[1],WM_metric,eval,thresh_method,tvalue)
-  print(length(L1))
-  print(dim(L1))
   L2 <- computeLocalMetric(df,group_list[2],WM_metric,eval,thresh_method,tvalue)
-  print(L2)
-  print(length(L2))
-  print(dim(L2))
   L3 <- computeLocalMetric(df,group_list[3],WM_metric,eval,thresh_method,tvalue)
-  print(length(L3))
-  print(dim(L3))
 
   # get the labels of the nodes
   all_nodes <- c(rownames(L1),rownames(L2),rownames(L3))
