@@ -137,6 +137,17 @@ computeMetric <- function(data,
         g <- sparseThresh(g,tvalue)
         print(density(g))
       }
+    } else if (thresh_method == "density_subgraph"){
+      g <- makeGraph(data,s_id,v_id,WM_metric,0)
+      gT <- sparseThresh(g,tvalue)
+      pattern <- if (rsnet == "left") "Left|ctx_lh_" else if (rsnet == "right") "Right|ctx_rh_"
+      i_DMN <- grep(pattern, V(gT)$name)
+      if (rsnet != "All"){
+        nodes_DMN <- V(gT)$name[i_DMN]
+        g <- induced_subgraph(
+          gT,
+          i_DMN)
+      }
     }
     if(eval == 'clust_coeff'& WM_metric != 'odi'){
       value <- transitivity(g,"global")
